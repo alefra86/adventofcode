@@ -2,6 +2,7 @@ package solutions2020;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -13,14 +14,7 @@ public class Solution02 {
     lines.forEach(line -> {
       String[] parts = line.split(" ");
       String[] range = parts[0].split("-");
-      char policyChar = parts[1].charAt(0);
-      String password = parts[2];
-      int counter = 0;
-      for (char passwordChar : password.toCharArray()) {
-        if (policyChar == passwordChar) {
-          counter += 1;
-        }
-      }
+      int counter = StringUtils.countMatches(parts[2], String.valueOf(parts[1].charAt(0)));
       if (Integer.parseInt(range[0]) <= counter && Integer.parseInt(range[1]) >= counter) {
         validPasswords.addAndGet(1);
       }
