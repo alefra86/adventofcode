@@ -2,7 +2,7 @@
 Solutions to https://adventofcode.com
 
 Days:
-1 <span style="color: #ffff66">**</span>
+1 ![#ffff66]`**`
 
 
 # Status
