@@ -2,7 +2,7 @@
 Solutions to https://adventofcode.com
 
 Days:
-1 ![#ffff66](Prova)`**`
+- 1 ```diff !**```
 
 
 # Status
