@@ -3,7 +3,7 @@ package solutions2020;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -32,7 +32,7 @@ public class Solution08 {
     return lines.map(line -> {
       Matcher matcher = Pattern.compile("^(\\w{3}) ([+|-]\\d+)$").matcher(line);
       if (matcher.find()) {
-        return new Instruction(Operation.valueOf(matcher.group(1).toUpperCase()), Integer.parseInt(matcher.group(2)));
+        return Operation.valueOf(matcher.group(1).toUpperCase()).getRetriever().apply(Integer.parseInt(matcher.group(2)));
       }
       return null;
     }).filter(Objects::nonNull).collect(Collectors.toList());
@@ -76,52 +76,114 @@ public class Solution08 {
     return null;
   }
 
-  private static class Instruction {
+  private interface Instruction {
 
-    private final Operation operation;
+    Integer nextAccumulator(int current);
+
+    Integer nextIndex(int current);
+
+    boolean canChange();
+
+    default Instruction changeOperation() {
+      return this;
+    }
+  }
+
+  private static class NopInstruction implements Instruction {
+
     private final int argument;
 
-    public Instruction(Operation operation, int argument) {
-      this.operation = operation;
+    private NopInstruction(int argument) {
       this.argument = argument;
     }
 
+    @Override
     public Integer nextAccumulator(int current) {
-      return operation.getAccumulatorCalculator().apply(current, argument);
+      return current;
     }
 
+    @Override
     public Integer nextIndex(int current) {
-      return operation.getIndexCalculator().apply(current, argument);
+      return current + 1;
     }
 
+    @Override
     public boolean canChange() {
-      return operation == Operation.NOP || operation == Operation.JMP;
+      return true;
     }
 
+    @Override
     public Instruction changeOperation() {
-      return new Instruction(operation == Operation.NOP ? Operation.JMP : Operation.NOP, argument);
+      return new JmpInstruction(argument);
+    }
+  }
+
+  private static class JmpInstruction implements Instruction {
+
+    private final int argument;
+
+    private JmpInstruction(int argument) {
+      this.argument = argument;
+    }
+
+    @Override
+    public Integer nextAccumulator(int current) {
+      return current;
+    }
+
+    @Override
+    public Integer nextIndex(int current) {
+      return current + argument;
+    }
+
+    @Override
+    public boolean canChange() {
+      return true;
+    }
+
+    @Override
+    public Instruction changeOperation() {
+      return new NopInstruction(argument);
+    }
+  }
+
+  private static class AccInstruction implements Instruction {
+
+    private final int argument;
+
+    private AccInstruction(int argument) {
+      this.argument = argument;
+    }
+
+    @Override
+    public Integer nextAccumulator(int current) {
+      return current + argument;
+    }
+
+    @Override
+    public Integer nextIndex(int current) {
+      return current + 1;
+    }
+
+    @Override
+    public boolean canChange() {
+      return false;
     }
   }
 
   private enum Operation {
-    NOP((i, j) -> i + 1, (i, j) -> i),
-    JMP(Integer::sum, (i, j) -> i),
-    ACC((i, j) -> i + 1, Integer::sum);
+    NOP(NopInstruction::new),
+    JMP(JmpInstruction::new),
+    ACC(AccInstruction::new);
 
-    private final BiFunction<Integer, Integer, Integer> indexCalculator;
-    private final BiFunction<Integer, Integer, Integer> accumulatorCalculator;
+    private final Function<Integer, Instruction> retriever;
 
-    Operation(BiFunction<Integer, Integer, Integer> indexCalculator, BiFunction<Integer, Integer, Integer> accumulatorCalculator) {
-      this.indexCalculator = indexCalculator;
-      this.accumulatorCalculator = accumulatorCalculator;
+    Operation(Function<Integer, Instruction> retriever) {
+      this.retriever = retriever;
     }
 
-    public BiFunction<Integer, Integer, Integer> getIndexCalculator() {
-      return indexCalculator;
-    }
-
-    public BiFunction<Integer, Integer, Integer> getAccumulatorCalculator() {
-      return accumulatorCalculator;
+    public Function<Integer, Instruction> getRetriever() {
+      return retriever;
     }
   }
 
