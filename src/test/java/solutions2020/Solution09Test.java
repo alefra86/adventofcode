@@ -16,6 +16,6 @@ public class Solution09Test {
 
   @Test
   public void testPartTwo() {
-    Assert.assertEquals(1033, Solution09.partTwo(FileReader.lines("2020/09-input.txt")));
+    Assert.assertEquals(3012420, Solution09.partTwo(FileReader.lines("2020/09-input.txt")));
   }
 }

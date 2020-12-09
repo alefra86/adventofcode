@@ -78,7 +78,7 @@ public class Solution09 {
       }
       sum -= allNumber.get(j);
     }
-    List<Long> contiguosNumbers = allNumber.subList(j, k);
+    List<Long> contiguosNumbers = allNumber.subList(j, k + 1);
     contiguosNumbers.sort(Comparator.naturalOrder());
     return contiguosNumbers.get(0) + contiguosNumbers.get(contiguosNumbers.size() - 1);
   }
