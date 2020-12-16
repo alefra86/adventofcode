@@ -23,7 +23,7 @@ public class FileReader {
     }
   }
 
-  public static List<String> readAlllines(String fileName) {
+  public static List<String> readAllLines(String fileName) {
     try {
       return Files.readAllLines(getFileFromResource(fileName));
     } catch (IOException | URISyntaxException e) {
