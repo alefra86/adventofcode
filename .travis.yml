@@ -1,1 +1,5 @@
+os: linux
+dist: focal
+group: edge
+arch: arm64-graviton2
 language: java
