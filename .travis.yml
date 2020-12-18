@@ -10,5 +10,9 @@ matrix:
         - cd java
 
     - language: scala
+      jdk: openjdk8
       before_script:
         - cd scala
+      scala:
+        - 2.13.4
+        - 2.12.10
