@@ -10,7 +10,6 @@ matrix:
         - cd java
 
     - language: scala
-      jdk: openjdk8
       before_script:
         - cd scala
       scala:
