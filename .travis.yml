@@ -3,7 +3,7 @@ dist: focal
 group: edge
 arch: arm64-graviton2
 language: java
-matrix:
+jobs:
   include:
     - language: java
       before_script:
@@ -13,5 +13,4 @@ matrix:
       before_script:
         - cd scala
       scala:
-        - 2.12.10
         - 2.13.4
