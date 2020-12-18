@@ -1,6 +1,6 @@
 # Advent of Code
 
-Solutions to https://adventofcode.com
+Java solutions to https://adventofcode.com
 
 # Status
 
