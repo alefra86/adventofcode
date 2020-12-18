@@ -1,0 +1,14 @@
+os: linux
+dist: focal
+group: edge
+arch: arm64-graviton2
+language: java
+matrix:
+  include:
+    - language: java
+      before_script:
+        - cd java
+
+    - language: scala
+      before_script:
+        - cd scala
