@@ -56,7 +56,6 @@ public class Solution19 {
   }
 
   private List<Pair<Boolean, Integer>> match(String message, Integer rulePosition, List<Integer> positions) {
-    List<List<Integer>> rules = allRules.get(rulePosition);
     List<Pair<Boolean, Integer>> allValid = new ArrayList<>();
     for (Integer position : positions) {
       if (position >= message.length()) {
@@ -68,7 +67,7 @@ public class Solution19 {
           allValid.addAll(Collections.singletonList(Pair.of(false, position)));
         }
       } else {
-        for (List<Integer> alternativeSubRules : rules) {
+        for (List<Integer> alternativeSubRules : allRules.get(rulePosition)) {
           List<Pair<Boolean, Integer>> valid = match(message, alternativeSubRules, position);
           if (valid.stream().anyMatch(Pair::getLeft) && !containsLoop.test(rulePosition)) {
             return valid;
