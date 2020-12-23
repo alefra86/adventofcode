@@ -1,7 +1,7 @@
 package com.franchini
+package solutions2020
 
 object Solution1 {
-
 
   def partOne(lines: Iterator[String]): Int = {
     var numbers: Seq[Int] = Seq.empty

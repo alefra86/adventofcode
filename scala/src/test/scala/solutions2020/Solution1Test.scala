@@ -1,4 +1,5 @@
 package com.franchini
+package solutions2020
 
 import org.scalatest.funsuite.AnyFunSuite
 
