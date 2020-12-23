@@ -23,6 +23,15 @@ public class FileReader {
     }
   }
 
+  public static String readString(String fileName) {
+    try {
+      return new String(Files.readAllBytes(getFileFromResource(fileName)));
+    } catch (IOException | URISyntaxException e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
+  }
+
   public static List<String> readAllLines(String fileName) {
     try {
       return Files.readAllLines(getFileFromResource(fileName));
