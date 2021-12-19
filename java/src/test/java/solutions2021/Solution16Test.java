@@ -18,12 +18,12 @@ public class Solution16Test {
 
   @Test
   public void testPartTwoExample() {
-    Assert.assertEquals(316, Solution16.partTwo(FileReader.readString("2021/16-input-example.txt")));
+    Assert.assertEquals(54, Solution16.partTwo(FileReader.readString("2021/16-input-example.txt")));
   }
 
   @Test
   public void testPartTwo() {
-    Assert.assertEquals(3012, Solution16.partTwo(FileReader.readString("2021/16-input.txt")));
+    Assert.assertEquals(158135423448L, Solution16.partTwo(FileReader.readString("2021/16-input.txt")));
   }
 
 }
