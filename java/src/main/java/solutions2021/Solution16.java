@@ -40,7 +40,7 @@ public class Solution16 {
     private final Deque<String> bits;
 
     private Parser(String packet) {
-      this.bits = Arrays.stream(packet.split("")).collect(Collectors.toCollection(ArrayDeque::new));
+      bits = Arrays.stream(packet.split("")).collect(Collectors.toCollection(ArrayDeque::new));
     }
 
     public Packet parse() {
@@ -116,14 +116,6 @@ public class Solution16 {
       }
       return p;
     }
-
-  }
-
-  @Data(staticConstructor = "of")
-  private static class ParserResult {
-
-    private final int lastPosition;
-    private final Packet packet;
 
   }
 
