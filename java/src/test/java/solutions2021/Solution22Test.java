@@ -23,7 +23,7 @@ public class Solution22Test {
 
   @Test
   public void testPartTwo() {
-    Assert.assertEquals(148747830493442L, Solution22.partTwo(FileReader.readAllLines("2021/22-input.txt")));
+    Assert.assertEquals(1206644425246111L, Solution22.partTwo(FileReader.readAllLines("2021/22-input.txt")));
   }
 
 }

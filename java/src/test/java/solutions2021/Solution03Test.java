@@ -13,7 +13,7 @@ public class Solution03Test {
 
   @Test
   public void testPartOne() {
-    Assert.assertEquals(2073315, Solution03.partOne(FileReader.readAllLines("2021/03-input.txt")));
+    Assert.assertEquals(4160394, Solution03.partOne(FileReader.readAllLines("2021/03-input.txt")));
   }
 
   @Test
